@@ -56,29 +56,27 @@ void loop() {
     sensorArr[6] -> Near sensor
   */
 
-    if (!sensorData[2]) {
-      forward();
-    } else if (!sensorData[1] || !sensorData[0]) {
-      left();
-    } else if (!sensorData[3] || !sensorData[4]) {
-      right();
-    } else{
-      _stop();
-    }
-
-  /*
-     else if (!sensorData[0]) {
-    //    Serial.println("Turn left");
-    //    left();
-    } else if (!sensorData[5]) {
-    //    Serial.println("Turn right");
-    //    left();
-    } else {
-    Serial.println("Stop");
+  if (!sensorData[2]) {
+    analogWrite(MotorRE, 55);
+    analogWrite(MotorLE, 55);
+    forward();
+  } else if (!sensorData[2] && !sensorData[1]) {
+    analogWrite(MotorRE, 55);
+    analogWrite(MotorLE, 35);
+    forward();
+  } else if (!sensorData[2] && !sensorData[3]) {
+    analogWrite(MotorRE, 35);
+    analogWrite(MotorLE, 55);
+    forward();
+  } else if (!sensorData[1] || !sensorData[0]) {
+    analogWrite(MotorLE, 60);
+    left();
+  } else if (!sensorData[3] || !sensorData[4]) {
+    analogWrite(MotorRE, 60);
+    right();
+  } else {
     _stop();
-    }
-  */
-
+  }
 }
 
 void forward() {
